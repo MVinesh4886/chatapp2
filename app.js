@@ -1,14 +1,15 @@
+const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config();
 const db = require("./config/database");
-const User = require("../chatapp/model/User.js");
-const Messages = require("../chatapp/model/Chat.js");
-const Group = require("../chatapp/model/Group.js");
-const GroupMember = require("../chatapp/model/GroupMember.js");
-const userRoute = require("../chatapp/route/userRoute.js");
-const chatRoute = require("../chatapp/route/chatRoute.js");
-const groupRoute = require("../chatapp/route/groupRoute.js");
-const groupMemberRoute = require("../chatapp/route/groupMemberRoute.js");
+const User = require("../chatapp2/model/User.js");
+const Messages = require("../chatapp2/model/Chat.js");
+const Group = require("../chatapp2/model/Group.js");
+const GroupMember = require("../chatapp2/model/GroupMember.js");
+const userRoute = require("../chatapp2/route/userRoute.js");
+const chatRoute = require("../chatapp2/route/chatRoute.js");
+const groupRoute = require("../chatapp2/route/groupRoute.js");
+const groupMemberRoute = require("../chatapp2/route/groupMemberRoute.js");
 
 User.hasMany(Group); //a User can have multiple groups.
 Group.belongsTo(User); //a group belongs to a single user.
@@ -22,7 +23,6 @@ Messages.belongsTo(Group); //messages belongs to a single group.
 User.belongsToMany(Group, { through: "GroupMember" }); //a user can belong to multiple groups, and a group can have multiple users.
 Group.belongsToMany(User, { through: "GroupMember" }); //a group can belong to multiple users, and a users can have multiple groups.
 
-const express = require("express");
 const cors = require("cors");
 
 const app = express();
