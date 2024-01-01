@@ -8,7 +8,7 @@ const Group = require("../chatapp2/model/Group.js");
 const GroupMember = require("../chatapp2/model/GroupMember.js");
 const userRoute = require("../chatapp2/route/userRoute.js");
 const chatRoute = require("../chatapp2/route/chatRoute.js");
-const groupRoute = require("../chatapp2/route/groupRoute.js");
+const groupRoute = require("../chatapp2/route/GroupRoute.js");
 const groupMemberRoute = require("../chatapp2/route/groupMemberRoute.js");
 
 User.hasMany(Group); //a User can have multiple groups.
