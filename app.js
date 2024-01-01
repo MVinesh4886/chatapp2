@@ -1,4 +1,5 @@
-require("dotenv").config();
+const dotenv = require("dotenv");
+dotenv.config();
 const db = require("./config/database");
 const User = require("../chatapp/model/User");
 const Messages = require("../chatapp/model/Chat");
