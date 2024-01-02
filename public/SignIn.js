@@ -12,13 +12,15 @@ async function loginUser(event) {
     // console.log(response.data.message);
     alert(response.data.message);
 
+    console.log(response.data.data.token);
+
     localStorage.setItem(
       "userDetails",
       JSON.stringify(response.data.data.token)
     );
-    window.location.href = "./Chatapp.html";
+    window.location.href = `./Chatapp.html`;
   } catch (error) {
-    // console.log(error);
+    console.log(error);
     // console.log(error.response.data);
     alert(error.response.data.message);
   }

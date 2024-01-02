@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config();
 const db = require("./config/database");
+const path = require("path");
 const User = require("../chatapp2/model/User.js");
 const Messages = require("../chatapp2/model/Chat.js");
 const Group = require("../chatapp2/model/Group.js");
@@ -23,22 +24,28 @@ Messages.belongsTo(Group); //messages belongs to a single group.
 User.belongsToMany(Group, { through: "GroupMember" }); //a user can belong to multiple groups, and a group can have multiple users.
 Group.belongsToMany(User, { through: "GroupMember" }); //a group can belong to multiple users, and a users can have multiple groups.
 
-const cors = require("cors");
+// const cors = require("cors");
 
 const app = express();
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: "http://127.0.0.1:5500",
-    // methods: ["GET", "POST", "DELETE", "PUT"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: "http://127.0.0.1:5500",
+//     // methods: ["GET", "POST", "DELETE", "PUT"],
+//     credentials: true,
+//   })
+// );
+
 app.use("/user", userRoute);
 app.use("/api", chatRoute);
 app.use("/api", groupRoute);
 app.use("/api", groupMemberRoute);
+
+app.use((req, res) => {
+  console.log(__dirname, req.url);
+  res.sendFile(path.join(__dirname, `public/${req.url}`));
+});
 
 const PORT = process.env.PORT;
 
