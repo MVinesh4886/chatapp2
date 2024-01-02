@@ -24,18 +24,19 @@ Messages.belongsTo(Group); //messages belongs to a single group.
 User.belongsToMany(Group, { through: "GroupMember" }); //a user can belong to multiple groups, and a group can have multiple users.
 Group.belongsToMany(User, { through: "GroupMember" }); //a group can belong to multiple users, and a users can have multiple groups.
 
-// const cors = require("cors");
+const cors = require("cors");
 
 const app = express();
 
 app.use(express.json());
-// app.use(
-//   cors({
-//     origin: "http://127.0.0.1:5500",
-//     // methods: ["GET", "POST", "DELETE", "PUT"],
-//     credentials: true,
-//   })
-// );
+
+app.use(
+  cors({
+    origin: "http://54.196.136.82",
+    // methods: ["GET", "POST", "DELETE", "PUT"],
+    credentials: true,
+  })
+);
 
 app.use("/user", userRoute);
 app.use("/api", chatRoute);
