@@ -5,7 +5,7 @@ async function registerUser(event) {
   const password = document.getElementById("password").value;
 
   try {
-    const response = await axios.post("http://54.196.136.82:3000/user/signUp", {
+    const response = await axios.post("http://54.196.136.82:8000/user/signUp", {
       name,
       emailId,
       password,

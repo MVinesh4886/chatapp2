@@ -25,7 +25,7 @@ async function getCreatedGroup() {
     const token = JSON.parse(localStorage.getItem("userDetails"));
 
     const response = await axios.get(
-      `http://54.196.136.82:3000/api/getCreatedGroup`,
+      `http://54.196.136.82:8000/api/getCreatedGroup`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -65,7 +65,7 @@ async function createGroup(event) {
     const token = JSON.parse(localStorage.getItem("userDetails"));
 
     const response = await axios.post(
-      `http://54.196.136.82:3000/api/createGroup`,
+      `http://54.196.136.82:8000/api/createGroup`,
       groupName,
       {
         headers: {
@@ -215,7 +215,7 @@ function openGroup(groupId, groupName) {
       const token = JSON.parse(localStorage.getItem("userDetails"));
 
       const response = await axios.post(
-        `http://54.196.136.82:3000/api/addUserToGroup/${groupId}`,
+        `http://54.196.136.82:8000/api/addUserToGroup/${groupId}`,
         user,
         {
           headers: {
@@ -235,7 +235,7 @@ function openGroup(groupId, groupName) {
       const token = JSON.parse(localStorage.getItem("userDetails"));
 
       const response = await axios.get(
-        `http://54.196.136.82:3000/api/getUserGroup/${groupId}`,
+        `http://54.196.136.82:8000/api/getUserGroup/${groupId}`,
         // user,
         {
           headers: {
@@ -279,7 +279,7 @@ function openGroup(groupId, groupName) {
           const endpoint = member.isAdmin ? `removeAdmin` : `makeAdmin`;
 
           const response = await axios.post(
-            `http://54.196.136.82:3000/api/${endpoint}/${member.GroupId}/${member.userId}`,
+            `http://54.196.136.82:8000/api/${endpoint}/${member.GroupId}/${member.userId}`,
             {},
             {
               headers: {
@@ -304,7 +304,7 @@ function openGroup(groupId, groupName) {
           const token = JSON.parse(localStorage.getItem("userDetails"));
 
           const deleteResponse = await axios.delete(
-            `http://54.196.136.82:3000/api/GroupId/${member.GroupId}/userId/${member.userId}`,
+            `http://54.196.136.82:8000/api/GroupId/${member.GroupId}/userId/${member.userId}`,
             // user,
             {
               headers: {
@@ -335,7 +335,7 @@ function openGroup(groupId, groupName) {
       const token = JSON.parse(localStorage.getItem("userDetails"));
 
       const response = await axios.get(
-        `http://54.196.136.82:3000/api/getMessage/${groupId}`,
+        `http://54.196.136.82:8000/api/getMessage/${groupId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -419,7 +419,7 @@ async function sendMessageToGroup(groupId) {
     const token = JSON.parse(localStorage.getItem("userDetails"));
 
     const response = await axios.post(
-      `http://54.196.136.82:3000/api/createMessage/${groupId}`,
+      `http://54.196.136.82:8000/api/createMessage/${groupId}`,
       message,
       {
         headers: {
