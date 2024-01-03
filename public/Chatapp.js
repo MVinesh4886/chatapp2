@@ -373,7 +373,7 @@ function openGroup(groupId, groupName) {
     }
   }
 
-  // displayMessages();
+  displayMessages();
   // setInterval(() => displayMessages(), 1000);
 }
 socket.on("message", (message) => {
