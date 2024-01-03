@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config();
+
 const db = require("./config/database");
 const path = require("path");
 const User = require("../chatapp2/model/User.js");
@@ -28,6 +29,9 @@ const cors = require("cors");
 
 const app = express();
 
+const http = require("http").createServer(app);
+const io = require("socket.io")(http);
+
 app.use(express.json());
 
 app.use(
@@ -48,15 +52,33 @@ app.use((req, res) => {
   res.sendFile(path.join(__dirname, `public/${req.url}`));
 });
 
+io.on("connection", (socket) => {
+  console.log("A user connected");
+
+  socket.on("sendMessage", (message) => {
+    io.emit("message", message);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("User disconnected");
+  });
+
+  // console.log(socket);
+  console.log("Id of the socket: ", socket.id);
+});
+
 const PORT = process.env.PORT;
 
 db.sync()
   .then((result) => {
     // console.log(result);
-    app.listen(PORT, () => {
-      console.log(`Server is listening on ${PORT}`);
-    });
+    console.log("Database and tables created!");
   })
   .catch((err) => {
     console.log(err);
   });
+
+http.listen(PORT, () => {
+  console.log(`Server is listening on ${PORT}`);
+});
+//npm i socket.io-client

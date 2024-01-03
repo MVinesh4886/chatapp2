@@ -1,3 +1,11 @@
+const socket = io("http://54.196.136.82");
+
+socket.on("connect", () => {
+  // console.log(socket);
+  console.log("A user connected to the server");
+  console.log("Id of the socket: ", socket.id);
+});
+
 // let groups = JSON.parse(localStorage.getItem("groups")) || [];
 let groups = [];
 const storedGroups = localStorage.getItem("groups");
@@ -366,8 +374,16 @@ function openGroup(groupId, groupName) {
   }
 
   // displayMessages();
-  setInterval(() => displayMessages(), 1000);
+  // setInterval(() => displayMessages(), 1000);
 }
+socket.on("message", (message) => {
+  console.log(message);
+  // Append the new message to the chatbox
+  const chatBox = document.getElementById("chatBox");
+  const messageElement = document.createElement("p");
+  messageElement.textContent = `💬 ${message.content}   `;
+  chatBox.appendChild(messageElement);
+});
 //
 //
 //
@@ -411,6 +427,9 @@ async function sendMessageToGroup(groupId) {
         },
       }
     );
+
+    socket.emit("sendMessage", message);
+
     console.log(response);
     console.log(response.data.message.content);
   } catch (error) {
